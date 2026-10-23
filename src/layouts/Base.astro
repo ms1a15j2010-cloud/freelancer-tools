@@ -1,0 +1,58 @@
+---
+const { title, description = 'Honest guides to the software freelancers actually use.' } = Astro.props;
+const siteName = 'Freelancer Tools';
+const fullTitle = title ? `${title} | ${siteName}` : siteName;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <style is:global>
+      :root {
+        --bg: #f4f7f8;
+        --ink: #14202b;
+        --muted: #5a6b78;
+        --line: #d5dfe4;
+        --accent: #0b6e78;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font: 18px/1.65 Georgia, 'Times New Roman', serif;
+      }
+      a { color: var(--accent); }
+      a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+      .wrap { max-width: 42rem; margin: 0 auto; padding: 0 1.25rem; }
+      header.site { padding: 1.5rem 0; border-bottom: 1px solid var(--line); }
+      header.site .wrap { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+      header.site a.brand { font: 700 1.25rem/1 system-ui, sans-serif; color: var(--ink); text-decoration: none; }
+      header.site nav a { font: 500 1rem system-ui, sans-serif; margin-left: 1.25rem; text-decoration: none; }
+      main { padding: 2.5rem 0 4rem; }
+      h1 { font: 800 clamp(2rem, 6vw, 3rem)/1.1 system-ui, sans-serif; margin: 0 0 1rem; letter-spacing: -0.02em; }
+      h2 { font: 700 1.5rem/1.25 system-ui, sans-serif; margin: 2.25rem 0 0.5rem; }
+      .lede { font-size: 1.2rem; color: var(--muted); max-width: 36rem; }
+      ul.posts { list-style: none; padding: 0; margin: 2rem 0 0; }
+      ul.posts li { padding: 1.25rem 0; border-top: 1px solid var(--line); }
+      ul.posts a.t { font: 700 1.25rem/1.3 system-ui, sans-serif; text-decoration: none; }
+      ul.posts p { margin: 0.35rem 0 0; color: var(--muted); }
+      .date { font: 0.9rem system-ui, sans-serif; color: var(--muted); }
+      .disclosure { font: 0.9rem/1.5 system-ui, sans-serif; color: var(--muted); border-left: 3px solid var(--accent); padding-left: 0.75rem; margin: 1.5rem 0; }
+      footer.site { border-top: 1px solid var(--line); padding: 1.5rem 0 3rem; font: 0.9rem system-ui, sans-serif; color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <header class="site">
+      <div class="wrap">
+        <a class="brand" href="/">{siteName}</a>
+        <nav><a href="/">Guides</a><a href="/about">About</a></nav>
+      </div>
+    </header>
+    <main><div class="wrap"><slot /></div></main>
+    <footer class="site"><div class="wrap">Some links on this site are affiliate links. We may earn a commission at no extra cost to you.</div></footer>
+  </body>
+</html>
