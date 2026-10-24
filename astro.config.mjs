@@ -1,4 +1,8 @@
 import { defineConfig } from 'astro/config';
 
-// After you buy a domain, put it here, e.g. site: 'https://yourdomain.com'
-export default defineConfig({});
+import sitemap from '@astrojs/sitemap';
+
+export default defineConfig({
+  site: 'https://freelancer-tools-one.vercel.app',
+  integrations: [sitemap()]
+});
