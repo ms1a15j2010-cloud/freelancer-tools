@@ -9,6 +9,10 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+
+const all = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const i = all.findIndex((p) => p.id === post.id);
+const more = [1, 2, 3, 4].map((n) => all[(i + n) % all.length]);
 ---
 <Base title={post.data.title} description={post.data.description}>
   <article>
@@ -17,4 +21,18 @@ const { Content } = await render(post);
     <p class="disclosure">This post may contain affiliate links. If you buy through them, we may earn a commission at no extra cost to you.</p>
     <Content />
   </article>
+  <aside class="more">
+    <h2>More guides for freelancers</h2>
+    <ul>
+      {more.map((p) => (
+        <li><a href={`/blog/${p.id}/`}>{p.data.title}</a></li>
+      ))}
+    </ul>
+  </aside>
 </Base>
+
+<style>
+  .more { margin-top: 3rem; border-top: 1px solid var(--line); padding-top: 0.5rem; }
+  .more ul { padding-left: 1.2rem; }
+  .more li { margin: 0.5rem 0; }
+</style>
